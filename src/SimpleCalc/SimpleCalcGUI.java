@@ -1,7 +1,5 @@
 package SimpleCalc;
 
-import LeapYear.LeapYearGUI;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,24 +17,30 @@ public class SimpleCalcGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                    int n1 = Integer.parseInt(tfNumber1.getText());
-                    int n2 = Integer.parseInt(tfNumber2.getText());
+                try {
+                    double n1 = Double.parseDouble(tfNumber1.getText());
+                    double n2 = Double.parseDouble(tfNumber2.getText());
 
                     if (cbOperations.getSelectedItem().equals("+")){
-                        int result = n1+n2;
+                        Double result = n1+n2;
                         lblResult.setText(String.valueOf(result));
                     } else if (cbOperations.getSelectedItem().equals("-")){
-                        int result = n1-n2;
+                        Double result = n1-n2;
                         lblResult.setText(String.valueOf(result));
                     } else if (cbOperations.getSelectedItem().equals("*")){
-                        int result = n1*n2;
+                        Double result = n1*n2;
                         lblResult.setText(String.valueOf(result));
                     } else if (cbOperations.getSelectedItem().equals("/")){
-                        int result = n1/n2;
+                        Double result = n1/n2;
                         lblResult.setText(String.valueOf(result));
                     }
-
+                } catch (ArithmeticException a) {
+                    JOptionPane.showMessageDialog(null,"Cannot divide by zero.");
+                } catch (NumberFormatException a) {
+                    JOptionPane.showMessageDialog(null,"Input must be a number.");
+                } catch (Exception er) {
+                    JOptionPane.showMessageDialog(null,"Error");
+                }
 
             }
         });
